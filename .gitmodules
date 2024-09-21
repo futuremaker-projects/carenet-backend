@@ -1,0 +1,3 @@
+[submodule "src/main/resources/carenet-api-config"]
+	path = src/main/resources/carenet-api-config
+	url = https://github.com/futuremaker019/carenet-api-config.git
