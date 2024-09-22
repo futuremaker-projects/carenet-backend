@@ -39,6 +39,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
-          source: "./build/libs"
+          source: "./build/libs/api-0.0.1-SNAPSHOT.jar"
           target: "/var/www/carenet/backend"
-          strip_components: 2
+          strip_components: 3
+
+
