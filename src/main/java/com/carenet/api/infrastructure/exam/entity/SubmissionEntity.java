@@ -19,8 +19,10 @@ public class SubmissionEntity {
     @EmbeddedId
     private SubmissionComplexIds id;
 
+    // 선택한 답
     private Integer choice;
 
+    // 정답유무
     private Boolean correct;
 
 }
