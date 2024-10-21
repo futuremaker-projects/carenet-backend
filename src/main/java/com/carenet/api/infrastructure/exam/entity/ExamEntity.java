@@ -32,10 +32,6 @@ public class ExamEntity extends BaseEntity {
     @Column(columnDefinition = "int DEFAULT 0 COMMENT '정렬순서'")
     private int orders;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_account", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private UserAccountEntity userAccountEntity;
-
     @Setter
     @Column(columnDefinition = "bit default false NOT NULL COMMENT '삭제여부'")
     private boolean isRemoved;
@@ -62,7 +58,7 @@ public class ExamEntity extends BaseEntity {
     }
 
     public Exam toDomain() {
-        return Exam.of(id, name, orders, userAccountEntity.toDomain(), getCreatedAt(), getUpdatedAt());
+        return Exam.of(id, name, orders, getCreatedAt(), getUpdatedAt());
     }
 
 }

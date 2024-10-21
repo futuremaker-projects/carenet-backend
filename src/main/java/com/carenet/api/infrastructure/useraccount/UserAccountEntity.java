@@ -27,10 +27,15 @@ public class UserAccountEntity extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String username;
 
     @Column(columnDefinition = "bit DEFAULT false NOT NULL COMMENT '삭제여부'")
     private boolean isRemoved;
+
+    public UserAccountEntity(Long id, String username) {
+        this.id = id;
+        this.username = username;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -45,7 +50,7 @@ public class UserAccountEntity extends BaseEntity {
     }
 
     public UserAccount toDomain() {
-        return new UserAccount(this.id, this.name);
+        return new UserAccount(this.id, this.username);
     }
 
 }
