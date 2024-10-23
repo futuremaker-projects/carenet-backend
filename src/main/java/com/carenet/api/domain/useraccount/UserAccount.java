@@ -1,12 +1,11 @@
 package com.carenet.api.domain.useraccount;
 
 import com.carenet.api.infrastructure.useraccount.UserAccountEntity;
-import lombok.AllArgsConstructor;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 public class UserAccount {
 
@@ -21,7 +20,17 @@ public class UserAccount {
         return new UserAccount(id);
     }
 
+    public static UserAccount of(Long id, String username) {
+        return new UserAccount(id, username);
+    }
+
     public UserAccountEntity toEntity() {
-        return new UserAccountEntity(this.id, this.username);
+        return UserAccountEntity.of(this.id, this.username);
+    }
+
+    @QueryProjection
+    public UserAccount(Long id, String username) {
+        this.id = id;
+        this.username = username;
     }
 }

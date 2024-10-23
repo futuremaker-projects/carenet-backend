@@ -1,13 +1,10 @@
 package com.carenet.api.interfaces.controller;
 
-import com.carenet.api.domain.exam.model.Exam;
 import com.carenet.api.domain.exam.service.ExamService;
-import com.carenet.api.domain.useraccount.UserAccount;
 import com.carenet.api.interfaces.dto.ExamDto;
 import com.carenet.api.interfaces.dto.SearchExamDto;
 import com.carenet.api.support.response.Response;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.PostMapping;

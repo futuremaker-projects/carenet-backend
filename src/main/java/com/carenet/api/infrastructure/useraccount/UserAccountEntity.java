@@ -37,6 +37,10 @@ public class UserAccountEntity extends BaseEntity {
         this.username = username;
     }
 
+    public static UserAccountEntity of(Long id, String username) {
+        return new UserAccountEntity(id, username);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

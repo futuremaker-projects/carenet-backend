@@ -1,6 +1,7 @@
 package com.carenet.api.interfaces.dto;
 
 import com.carenet.api.domain.exam.model.Exam;
+import com.carenet.api.domain.useraccount.UserAccount;
 
 import java.time.LocalDateTime;
 
@@ -16,9 +17,13 @@ public class ExamDto {
         }
     }
 
-    public record Response(Long id, String name, int orders, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public record Response(Long id, String name, int orders, LocalDateTime createdAt, LocalDateTime updatedAt,
+                           UserAccount createUser, UserAccount updateUser) {
         public static Response of(Exam exam) {
-            return new Response(exam.getId(), exam.getName(), exam.getOrders(), exam.getCreatedAt(), exam.getUpdatedAt());
+            return new Response(
+                    exam.getId(), exam.getName(), exam.getOrders(), exam.getCreatedAt(), exam.getUpdatedAt(),
+                    exam.getCreateUser(), exam.getUpdateUser()
+            );
         }
     }
 
