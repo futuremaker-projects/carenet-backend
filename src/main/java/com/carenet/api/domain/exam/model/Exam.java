@@ -2,7 +2,7 @@ package com.carenet.api.domain.exam.model;
 
 import com.carenet.api.domain.useraccount.UserAccount;
 import com.carenet.api.infrastructure.exam.entity.ExamEntity;
-import com.carenet.api.interfaces.dto.ExamDto;
+import com.carenet.api.interfaces.exam.dto.ExamDto;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

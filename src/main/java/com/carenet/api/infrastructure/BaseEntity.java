@@ -25,11 +25,13 @@ public abstract class BaseEntity {
 
     @PrePersist
     void createdAt() {
+        this.createdBy = 1L;    // 인증 적용 후 삭제 필요
         this.createdAt = LocalDateTime.now();
     }
 
     @PreUpdate
     void updatedAt() {
+        this.updatedBy = 1L;
         this.updatedAt = LocalDateTime.now();
     }
 

@@ -1,13 +1,12 @@
 package com.carenet.api.infrastructure.exam.repository.exam;
 
-import com.carenet.api.domain.useraccount.QUserAccount;
 import com.carenet.api.infrastructure.Utils;
-import com.carenet.api.infrastructure.exam.dto.ExamResult;
-import com.carenet.api.infrastructure.exam.dto.QExamResult_Get;
+import com.carenet.api.infrastructure.exam.dto.result.ExamPayload;
+import com.carenet.api.infrastructure.exam.dto.result.QExamPayload_Get;
 import com.carenet.api.infrastructure.exam.entity.ExamEntity;
 import com.carenet.api.infrastructure.useraccount.QUserAccountEntity;
 import com.carenet.api.infrastructure.useraccount.dto.QUserAccountResult_Get;
-import com.carenet.api.interfaces.dto.SearchExamDto;
+import com.carenet.api.interfaces.exam.dto.SearchExamDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -32,11 +31,11 @@ public class ExamJpaQuerySupport extends QuerydslRepositorySupport {
         this.queryFactory = queryFactory;
     }
 
-    public Slice<ExamResult.Get> getExams(Pageable pageable, SearchExamDto.GetExams search) {
+    public Slice<ExamPayload.Get> getExams(Pageable pageable, SearchExamDto.Search search) {
         QUserAccountEntity createdBy = new QUserAccountEntity("createdBy");
         QUserAccountEntity updatedBy = new QUserAccountEntity("updatedBy");
-        List<ExamResult.Get> list = queryFactory.select(
-                        new QExamResult_Get(
+        List<ExamPayload.Get> list = queryFactory.select(
+                        new QExamPayload_Get(
                                 examEntity.id, examEntity.name, examEntity.orders,
                                 examEntity.createdAt, examEntity.updatedAt,
                                 examEntity.createdBy, examEntity.updatedBy,
@@ -46,29 +45,21 @@ public class ExamJpaQuerySupport extends QuerydslRepositorySupport {
                 .from(examEntity)
                 .leftJoin(createdBy).on(examEntity.createdBy.eq(createdBy.createdBy))
                 .leftJoin(updatedBy).on(examEntity.updatedBy.eq(updatedBy.createdBy))
-                .where(getBooleanBuilder(search))
+                .where(searchByConditions(search))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
                 .orderBy(Utils.getOrderList(pageable.getSort(), ExamEntity.class))
                 .fetch();
 
-        return new SliceImpl<>(list, pageable, hasNext(list, pageable.getPageSize()));
+        return new SliceImpl<>(list, pageable, Utils.hasNext(list, pageable.getPageSize()));
     }
 
-    public Long totalExamCount(SearchExamDto.GetExams search) {
+    public Long totalExamCount(SearchExamDto.Search search) {
         return queryFactory.select(examEntity.id.count())
-                .from(examEntity).where(getBooleanBuilder(search)).fetchOne();
+                .from(examEntity).where(searchByConditions(search)).fetchOne();
     }
 
-    private <T> Boolean hasNext(List<T> contents, int pageSize) {
-        if (contents.size() > pageSize) {
-            contents.remove(pageSize);
-            return true;
-        }
-        return false;
-    }
-
-    private BooleanBuilder getBooleanBuilder(SearchExamDto.GetExams search) {
+    private BooleanBuilder searchByConditions(SearchExamDto.Search search) {
         BooleanBuilder builder = new BooleanBuilder();
         return builder
                 .and(examNameEq(search.name()));

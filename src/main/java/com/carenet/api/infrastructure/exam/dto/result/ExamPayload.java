@@ -1,7 +1,6 @@
-package com.carenet.api.infrastructure.exam.dto;
+package com.carenet.api.infrastructure.exam.dto.result;
 
 import com.carenet.api.domain.exam.model.Exam;
-import com.carenet.api.domain.useraccount.UserAccount;
 import com.carenet.api.infrastructure.useraccount.dto.UserAccountResult;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /* response */
-public class ExamResult {
+public class ExamPayload {
 
     @Getter
     @NoArgsConstructor

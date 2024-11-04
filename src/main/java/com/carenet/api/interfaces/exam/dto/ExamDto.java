@@ -1,4 +1,4 @@
-package com.carenet.api.interfaces.dto;
+package com.carenet.api.interfaces.exam.dto;
 
 import com.carenet.api.domain.exam.model.Exam;
 import com.carenet.api.domain.useraccount.UserAccount;
@@ -25,6 +25,10 @@ public class ExamDto {
                     exam.getCreateUser(), exam.getUpdateUser()
             );
         }
+    }
+
+    public record Search(String name) {
+
     }
 
 }
