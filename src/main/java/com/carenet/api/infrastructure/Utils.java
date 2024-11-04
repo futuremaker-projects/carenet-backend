@@ -24,4 +24,12 @@ public class Utils {
         return Character.toLowerCase(className.charAt(0)) + className.substring(1);
     }
 
+    public static <T> Boolean hasNext(List<T> contents, int pageSize) {
+        if (contents.size() > pageSize) {
+            contents.remove(pageSize);
+            return true;
+        }
+        return false;
+    }
+
 }

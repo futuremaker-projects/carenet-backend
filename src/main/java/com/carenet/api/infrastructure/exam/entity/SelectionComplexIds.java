@@ -15,25 +15,27 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OptionsComplexIds implements Serializable {
+public class SelectionComplexIds implements Serializable {
 
     @Column(name = "question_id")
     private Long questionId;
-    @Column(name = "option_id")
-    private Long optionId;
+    @Column(name = "selection_id")
+    private Long selectionId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
-        if (!(o instanceof OptionsComplexIds ids)) return false;
-        return Objects.equals(questionId, ids.questionId) && Objects.equals(optionId, ids.optionId);
+        if (!(o instanceof SelectionComplexIds ids)) return false;
+        return Objects.equals(questionId, ids.questionId) && Objects.equals(selectionId, ids.selectionId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(questionId, optionId);
+        return Objects.hash(questionId, selectionId);
     }
 
-
+    public static SelectionComplexIds of(Long questionId, Long selectionId) {
+        return SelectionComplexIds.builder().questionId(questionId).selectionId(selectionId).build();
+    }
 }
