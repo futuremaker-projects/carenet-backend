@@ -13,4 +13,6 @@ public interface QuestionRepository {
     Slice<Question> getQuestionsByExamId(Pageable pageable, QuestionStatement.Get get);
 
     Long getTotalCountByExamId(SearchQuestionDto.Search search, Long examId);
+
+    Question getQuestion(Long questionId);
 }

@@ -2,7 +2,7 @@ package com.carenet.api.infrastructure.exam.repository.exam;
 
 import com.carenet.api.domain.exam.model.Exam;
 import com.carenet.api.domain.exam.repository.ExamRepository;
-import com.carenet.api.infrastructure.exam.dto.result.ExamPayload;
+import com.carenet.api.infrastructure.exam.dto.payload.ExamPayload;
 import com.carenet.api.interfaces.exam.dto.SearchExamDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

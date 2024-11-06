@@ -41,4 +41,10 @@ public class QuestionService {
     public Long getTotalCountByExamId(SearchQuestionDto.Search search, Long examId) {
         return questionRepository.getTotalCountByExamId(search, examId);
     }
+
+    public QuestionDto.Response getQuestion(Long questionId) {
+        Question question = questionRepository.getQuestion(questionId);
+        return QuestionDto.Response.from(question);
+
+    }
 }

@@ -1,12 +1,12 @@
 package com.carenet.api.infrastructure.exam.repository.exam;
 
+import com.carenet.api.domain.exception.ApplicationException;
+import com.carenet.api.domain.exception.ErrorCode;
 import com.carenet.api.infrastructure.Utils;
-import com.carenet.api.infrastructure.exam.dto.result.QQuestionPayload_Get;
-import com.carenet.api.infrastructure.exam.dto.result.QuestionPayload;
+import com.carenet.api.infrastructure.exam.dto.payload.*;
 import com.carenet.api.infrastructure.exam.dto.statement.QuestionStatement;
 import com.carenet.api.infrastructure.exam.entity.QuestionEntity;
 import com.carenet.api.infrastructure.useraccount.QUserAccountEntity;
-import com.carenet.api.infrastructure.useraccount.dto.QUserAccountResult_Get;
 import com.carenet.api.interfaces.question.dto.SearchQuestionDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -17,17 +17,23 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.carenet.api.infrastructure.exam.entity.QQuestionEntity.questionEntity;
+import static com.carenet.api.infrastructure.exam.entity.QSelectionEntity.selectionEntity;
+import static com.querydsl.core.group.GroupBy.groupBy;
+import static com.querydsl.core.group.GroupBy.list;
 
 @Repository
 public class QuestionJpaQuerySupport extends QuerydslRepositorySupport {
 
     private final JPAQueryFactory queryFactory;
+    private final SelectionJpaRepository selectionJpaRepository;
 
-    public QuestionJpaQuerySupport(JPAQueryFactory queryFactory) {
+    public QuestionJpaQuerySupport(JPAQueryFactory queryFactory, SelectionJpaRepository selectionJpaRepository) {
         super(QuestionEntity.class);
         this.queryFactory = queryFactory;
+        this.selectionJpaRepository = selectionJpaRepository;
     }
 
     public Slice<QuestionPayload.Get> getQuestionsByExamId(Pageable pageable, QuestionStatement.Get statement) {
@@ -38,8 +44,8 @@ public class QuestionJpaQuerySupport extends QuerydslRepositorySupport {
                         new QQuestionPayload_Get(
                                 questionEntity.id, questionEntity.examId, questionEntity.codeId,
                                 questionEntity.name, questionEntity.article,
-                                new QUserAccountResult_Get(createUser.id, createUser.username),
-                                new QUserAccountResult_Get(updateUser.id, updateUser.username)
+                                new QUserAccountPayload_Get(createUser.id, createUser.username),
+                                new QUserAccountPayload_Get(updateUser.id, updateUser.username)
                         ))
                 .from(questionEntity)
                 .leftJoin(createUser).on(createUser.id.eq(questionEntity.createdBy))
@@ -59,6 +65,30 @@ public class QuestionJpaQuerySupport extends QuerydslRepositorySupport {
                 .fetchOne();
     }
 
+    /**
+        단일 문제 조회
+     * */
+    public QuestionPayload.GetWithSelections getQuestion(Long questionId) {
+        QUserAccountEntity createUser = new QUserAccountEntity("createUser");
+        QUserAccountEntity updateUser = new QUserAccountEntity("updateUser");
+
+        Map<QuestionEntity, QuestionPayload.GetWithSelections> result = queryFactory.from(questionEntity)
+                .leftJoin(selectionEntity).on(selectionEntity.id.questionId.eq(questionId))
+                .where(questionEntity.id.eq(questionId))
+                .transform(groupBy(questionEntity).as(new QQuestionPayload_GetWithSelections(
+                        questionEntity.id, questionEntity.examId, questionEntity.codeId,
+                        questionEntity.name, questionEntity.article,
+                        new QUserAccountPayload_Get(createUser.id, createUser.username),
+                        new QUserAccountPayload_Get(updateUser.id, updateUser.username),
+                        list(new QSelectionPayload_Get(
+                                selectionEntity.id.questionId, selectionEntity.id.selectionId,
+                                selectionEntity.content, selectionEntity.createdAt,
+                                selectionEntity.updatedAt
+                        ))
+                )));
+        return result.values().stream().findFirst().orElseThrow(
+                () -> new ApplicationException(ErrorCode.CONTENT_NOT_FOUND, "question not found : id - %d".formatted(questionId)));
+    }
 
     private BooleanBuilder searchByConditions(SearchQuestionDto.Search search) {
         BooleanBuilder builder = new BooleanBuilder();

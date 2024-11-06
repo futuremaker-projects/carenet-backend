@@ -2,7 +2,7 @@ package com.carenet.api.infrastructure.exam.repository.exam;
 
 import com.carenet.api.domain.exam.model.Question;
 import com.carenet.api.domain.exam.repository.QuestionRepository;
-import com.carenet.api.infrastructure.exam.dto.result.QuestionPayload;
+import com.carenet.api.infrastructure.exam.dto.payload.QuestionPayload;
 import com.carenet.api.infrastructure.exam.dto.statement.QuestionStatement;
 import com.carenet.api.infrastructure.exam.entity.QuestionEntity;
 import com.carenet.api.interfaces.question.dto.SearchQuestionDto;
@@ -27,6 +27,13 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public Long getTotalCountByExamId(SearchQuestionDto.Search search, Long examId) {
         return questionJpaQuerySupport.getTotalCountByExamId(search, examId);
+    }
+
+    @Override
+    public Question getQuestion(Long questionId) {
+        QuestionPayload.GetWithSelections questionPayload =
+                questionJpaQuerySupport.getQuestion(questionId);
+        return questionPayload.toDomain();
     }
 
     @Override

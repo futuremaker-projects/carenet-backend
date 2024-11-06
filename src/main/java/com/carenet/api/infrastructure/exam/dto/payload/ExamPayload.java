@@ -1,4 +1,4 @@
-package com.carenet.api.infrastructure.exam.dto.result;
+package com.carenet.api.infrastructure.exam.dto.payload;
 
 import com.carenet.api.domain.exam.model.Exam;
 import com.carenet.api.infrastructure.useraccount.dto.UserAccountResult;

@@ -1,8 +1,8 @@
 package com.carenet.api.infrastructure.exam.repository.exam;
 
 import com.carenet.api.infrastructure.Utils;
-import com.carenet.api.infrastructure.exam.dto.result.ExamPayload;
-import com.carenet.api.infrastructure.exam.dto.result.QExamPayload_Get;
+import com.carenet.api.infrastructure.exam.dto.payload.ExamPayload;
+import com.carenet.api.infrastructure.exam.dto.payload.QExamPayload_Get;
 import com.carenet.api.infrastructure.exam.entity.ExamEntity;
 import com.carenet.api.infrastructure.useraccount.QUserAccountEntity;
 import com.carenet.api.infrastructure.useraccount.dto.QUserAccountResult_Get;
