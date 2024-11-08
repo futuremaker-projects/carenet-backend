@@ -7,7 +7,7 @@ import com.carenet.api.infrastructure.exam.dto.payload.*;
 import com.carenet.api.infrastructure.exam.dto.statement.QuestionStatement;
 import com.carenet.api.infrastructure.exam.entity.QuestionEntity;
 import com.carenet.api.infrastructure.useraccount.QUserAccountEntity;
-import com.carenet.api.interfaces.question.dto.SearchQuestionDto;
+import com.carenet.api.interfaces.exam.dto.SearchQuestionDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Pageable;

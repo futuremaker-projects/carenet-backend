@@ -1,6 +1,6 @@
-package com.carenet.api.interfaces.question.dto;
+package com.carenet.api.interfaces.exam.dto;
 
-import com.carenet.api.domain.dto.QuestionCommand;
+import com.carenet.api.domain.exam.dto.QuestionCommand;
 import com.carenet.api.domain.exam.model.Question;
 import com.carenet.api.domain.exam.model.Selection;
 

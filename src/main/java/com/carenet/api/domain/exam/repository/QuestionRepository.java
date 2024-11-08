@@ -2,7 +2,7 @@ package com.carenet.api.domain.exam.repository;
 
 import com.carenet.api.domain.exam.model.Question;
 import com.carenet.api.infrastructure.exam.dto.statement.QuestionStatement;
-import com.carenet.api.interfaces.question.dto.SearchQuestionDto;
+import com.carenet.api.interfaces.exam.dto.SearchQuestionDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 

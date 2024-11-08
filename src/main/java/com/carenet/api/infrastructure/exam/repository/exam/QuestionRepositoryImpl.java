@@ -5,7 +5,7 @@ import com.carenet.api.domain.exam.repository.QuestionRepository;
 import com.carenet.api.infrastructure.exam.dto.payload.QuestionPayload;
 import com.carenet.api.infrastructure.exam.dto.statement.QuestionStatement;
 import com.carenet.api.infrastructure.exam.entity.QuestionEntity;
-import com.carenet.api.interfaces.question.dto.SearchQuestionDto;
+import com.carenet.api.interfaces.exam.dto.SearchQuestionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;

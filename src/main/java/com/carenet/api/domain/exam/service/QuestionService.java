@@ -1,12 +1,12 @@
 package com.carenet.api.domain.exam.service;
 
-import com.carenet.api.domain.dto.QuestionCommand;
+import com.carenet.api.domain.exam.dto.QuestionCommand;
 import com.carenet.api.domain.exam.model.Selection;
 import com.carenet.api.domain.exam.model.Question;
 import com.carenet.api.domain.exam.repository.SelectionRepository;
 import com.carenet.api.domain.exam.repository.QuestionRepository;
-import com.carenet.api.interfaces.question.dto.QuestionDto;
-import com.carenet.api.interfaces.question.dto.SearchQuestionDto;
+import com.carenet.api.interfaces.exam.dto.QuestionDto;
+import com.carenet.api.interfaces.exam.dto.SearchQuestionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;

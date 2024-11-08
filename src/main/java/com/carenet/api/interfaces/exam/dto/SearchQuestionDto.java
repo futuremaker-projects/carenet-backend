@@ -1,4 +1,4 @@
-package com.carenet.api.interfaces.question.dto;
+package com.carenet.api.interfaces.exam.dto;
 
 public class SearchQuestionDto {
 

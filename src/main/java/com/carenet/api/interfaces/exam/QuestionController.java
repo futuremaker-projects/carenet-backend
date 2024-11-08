@@ -1,9 +1,9 @@
-package com.carenet.api.interfaces.question;
+package com.carenet.api.interfaces.exam;
 
 import com.carenet.api.domain.exam.service.QuestionService;
 import com.carenet.api.interfaces.exam.dto.ExamDto;
-import com.carenet.api.interfaces.question.dto.QuestionDto;
-import com.carenet.api.interfaces.question.dto.SearchQuestionDto;
+import com.carenet.api.interfaces.exam.dto.QuestionDto;
+import com.carenet.api.interfaces.exam.dto.SearchQuestionDto;
 import com.carenet.api.support.response.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -52,7 +52,7 @@ public class QuestionController {
             )}))
     @PostMapping("/{examId}/total")
     public Response<Long> getTotal(
-            @RequestBody SearchQuestionDto.Search search, @PathVariable Long examId
+            @RequestBody SearchQuestionDto.Search search, @PathVariable("examId") Long examId
     ) {
         Long count = questionService.getTotalCountByExamId(search, examId);
         return Response.success(count);

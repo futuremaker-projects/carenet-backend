@@ -1,4 +1,4 @@
-package com.carenet.api.domain.dto;
+package com.carenet.api.domain.exam.dto;
 
 import com.carenet.api.infrastructure.exam.dto.statement.QuestionStatement;
 

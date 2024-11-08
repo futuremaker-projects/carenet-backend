@@ -1,11 +1,11 @@
 package com.carenet.api.interfaces.exam;
 
-import com.carenet.api.domain.dto.QuestionCommand;
+import com.carenet.api.domain.exam.dto.QuestionCommand;
 import com.carenet.api.domain.exam.service.ExamService;
 import com.carenet.api.domain.exam.service.QuestionService;
 import com.carenet.api.interfaces.exam.dto.ExamDto;
 import com.carenet.api.interfaces.exam.dto.SearchExamDto;
-import com.carenet.api.interfaces.question.dto.QuestionDto;
+import com.carenet.api.interfaces.exam.dto.QuestionDto;
 import com.carenet.api.support.response.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -84,7 +84,7 @@ public class ExamController {
                     """
             )}))
     @PostMapping("/{examId}/questions")
-    public Response<Slice<QuestionDto.Response>> getQuestionsByExamId(Pageable pageable, @PathVariable Long examId) {
+    public Response<Slice<QuestionDto.Response>> getQuestionsByExamId(Pageable pageable, @PathVariable("examId") Long examId) {
         Slice<QuestionDto.Response> questions =
                 questionService.getQuestionsByExamId(pageable, QuestionCommand.Get.of(examId));
         return Response.success(questions);

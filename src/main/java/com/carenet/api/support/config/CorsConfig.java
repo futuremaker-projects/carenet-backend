@@ -9,7 +9,6 @@ import org.springframework.core.annotation.Order;
 
 import java.io.IOException;
 
-
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsConfig implements Filter {
