@@ -3,15 +3,17 @@ package com.carenet.api.domain.exam.model;
 import com.carenet.api.domain.useraccount.UserAccount;
 import com.carenet.api.infrastructure.exam.entity.QuestionEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/*
+/**
     문제
  */
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Question {
@@ -29,9 +31,10 @@ public class Question {
     private UserAccount createUser;
     private UserAccount updateUser;
 
-    public Question(String name, Long examId) {
+    public Question(String name, Long examId, String article) {
         this.name = name;
         this.examId = examId;
+        this.article = article;
     }
 
     public Question(Long id, String name, Long codeId, Long examId, String article, Integer answer) {
@@ -52,8 +55,12 @@ public class Question {
         this.selections = selections;
     }
 
-    public static Question of(String name, Long examId) {
-        return new Question(name, examId);
+    public static Question of(Long id, String article) {
+        return Question.builder().id(id).article(article).build();
+    }
+
+    public static Question of(String name, Long examId, String article) {
+        return new Question(name, examId, article);
     }
 
     public static Question of(Long id, String name, Long examId, Long codeId, String article, Integer answer) {
@@ -64,7 +71,15 @@ public class Question {
         return new Question(id, name, codeId, examId, article, selections);
     }
 
-    public QuestionEntity toEntity() {
-        return QuestionEntity.of(this.name, this.examId);
+    public QuestionEntity toSave() {
+        return QuestionEntity.of(this.name, this.examId, this.article);
+    }
+
+    public QuestionEntity toUpdate() {
+        return QuestionEntity.of(this.id, this.article);
+    }
+
+    public void updateArticle(Question question) {
+        this.article = question.article;
     }
 }

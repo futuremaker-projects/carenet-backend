@@ -90,20 +90,4 @@ public class ExamController {
         return Response.success(questions);
     }
 
-    @Operation(summary = "문제 단일 조회")
-    @Parameter(name = "문제 단일 조회", description = "문제 상세페이지")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(examples = {
-            @ExampleObject(name = "QuestionDto.Response", value =
-                    """
-                        {}
-                    """
-            )}))
-    @GetMapping("/{examId}/questions/{questionId}")
-    public Response<QuestionDto.Response> getQuestionByExamId(
-            @PathVariable Long examId, @PathVariable Long questionId
-    ) {
-        QuestionDto.Response question = questionService.getQuestion(questionId);
-        return Response.success(question);
-    }
-
 }

@@ -37,6 +37,6 @@ public class Selection {
     }
 
     public SelectionEntity toEntity() {
-        return SelectionEntity.of(questionId, selectionId);
+        return SelectionEntity.of(questionId, selectionId, content);
     }
 }

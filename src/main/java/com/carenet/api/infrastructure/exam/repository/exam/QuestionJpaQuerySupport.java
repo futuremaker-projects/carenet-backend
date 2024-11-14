@@ -36,6 +36,7 @@ public class QuestionJpaQuerySupport extends QuerydslRepositorySupport {
         this.selectionJpaRepository = selectionJpaRepository;
     }
 
+    /** 문제 목록조회 */
     public Slice<QuestionPayload.Get> getQuestionsByExamId(Pageable pageable, QuestionStatement.Get statement) {
         QUserAccountEntity createUser = new QUserAccountEntity("createUser");
         QUserAccountEntity updateUser = new QUserAccountEntity("updateUser");
@@ -65,15 +66,15 @@ public class QuestionJpaQuerySupport extends QuerydslRepositorySupport {
                 .fetchOne();
     }
 
-    /**
-        단일 문제 조회
-     * */
+    /** 문제 단일조회 */
     public QuestionPayload.GetWithSelections getQuestion(Long questionId) {
         QUserAccountEntity createUser = new QUserAccountEntity("createUser");
         QUserAccountEntity updateUser = new QUserAccountEntity("updateUser");
 
         Map<QuestionEntity, QuestionPayload.GetWithSelections> result = queryFactory.from(questionEntity)
                 .leftJoin(selectionEntity).on(selectionEntity.id.questionId.eq(questionId))
+                .leftJoin(createUser).on(createUser.id.eq(questionEntity.createdBy))
+                .leftJoin(updateUser).on(updateUser.id.eq(questionEntity.updatedBy))
                 .where(questionEntity.id.eq(questionId))
                 .transform(groupBy(questionEntity).as(new QQuestionPayload_GetWithSelections(
                         questionEntity.id, questionEntity.examId, questionEntity.codeId,
@@ -82,8 +83,7 @@ public class QuestionJpaQuerySupport extends QuerydslRepositorySupport {
                         new QUserAccountPayload_Get(updateUser.id, updateUser.username),
                         list(new QSelectionPayload_Get(
                                 selectionEntity.id.questionId, selectionEntity.id.selectionId,
-                                selectionEntity.content, selectionEntity.createdAt,
-                                selectionEntity.updatedAt
+                                selectionEntity.content, selectionEntity.createdAt, selectionEntity.updatedAt
                         ))
                 )));
         return result.values().stream().findFirst().orElseThrow(

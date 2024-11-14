@@ -29,12 +29,18 @@ public class SelectionEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public SelectionEntity(SelectionComplexIds id) {
-        this.id = id;
+    @PrePersist
+    private void createdAt() {
+        createdAt = LocalDateTime.now();
     }
 
-    public static SelectionEntity of(Long questionId, Long optionId) {
-        return new SelectionEntity(SelectionComplexIds.of(questionId, optionId));
+    public SelectionEntity(SelectionComplexIds id, String content) {
+        this.id = id;
+        this.content = content;
+    }
+
+    public static SelectionEntity of(Long questionId, Long optionId, String content) {
+        return new SelectionEntity(SelectionComplexIds.of(questionId, optionId), content);
     }
 
     public Selection toDomain() {

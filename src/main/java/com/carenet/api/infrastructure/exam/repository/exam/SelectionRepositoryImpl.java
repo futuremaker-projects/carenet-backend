@@ -16,4 +16,9 @@ public class SelectionRepositoryImpl implements SelectionRepository {
         return selectionJpaRepository.save(selection.toEntity()).toDomain();
     }
 
+    @Override
+    public void updateSelection(Selection selection) {
+        selectionJpaRepository.save(selection.toEntity());
+    }
+
 }

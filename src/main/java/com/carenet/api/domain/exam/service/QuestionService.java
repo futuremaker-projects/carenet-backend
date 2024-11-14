@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.LongStream;
 
@@ -23,7 +24,7 @@ public class QuestionService {
 
     public Slice<QuestionDto.Response> getQuestionsByExamId(Pageable pageable, QuestionCommand.Get get) {
         return questionRepository.getQuestionsByExamId(pageable, get.toStatement())
-                .map(QuestionDto.Response::from);
+                .map(QuestionDto.Response::fromDomainList);
     }
 
     /**
@@ -33,7 +34,10 @@ public class QuestionService {
         Question savedQuestion = questionRepository.save(question);
 
         LongStream.rangeClosed(1, 5).forEach(i -> {
-            Selection selection = Selection.of(savedQuestion.getId(), i);
+            Selection selection = Selection.of(
+                    savedQuestion.getId(), i,
+                    "%d번 객관식 답을 작성해주세요.".formatted(i)
+            );
             selectionRepository.save(selection);
         });
     }
@@ -44,7 +48,11 @@ public class QuestionService {
 
     public QuestionDto.Response getQuestion(Long questionId) {
         Question question = questionRepository.getQuestion(questionId);
-        return QuestionDto.Response.from(question);
+        return QuestionDto.Response.fromDomain(question);
+    }
 
+    @Transactional
+    public void updateArticle(Question update) {
+        questionRepository.updateArticle(update);
     }
 }

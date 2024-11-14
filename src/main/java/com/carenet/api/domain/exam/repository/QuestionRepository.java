@@ -15,4 +15,6 @@ public interface QuestionRepository {
     Long getTotalCountByExamId(SearchQuestionDto.Search search, Long examId);
 
     Question getQuestion(Long questionId);
+
+    void updateArticle(Question question);
 }

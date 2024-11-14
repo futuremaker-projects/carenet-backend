@@ -58,4 +58,24 @@ public class QuestionController {
         return Response.success(count);
     }
 
+    @Operation(summary = "문제 단일 조회")
+    @Parameter(name = "문제 단일 조회", description = "문제 상세페이지")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(examples = {
+            @ExampleObject(name = "QuestionDto.Response", value =
+                    """
+                        {}
+                    """
+            )}))
+    @GetMapping("/{questionId}")
+    public Response<QuestionDto.Response> getQuestionByExamId(@PathVariable("questionId") Long questionId) {
+        QuestionDto.Response question = questionService.getQuestion(questionId);
+        return Response.success(question);
+    }
+
+    @PutMapping
+    public Response<Void> updateArticle(@RequestBody QuestionDto.Request request) {
+        questionService.updateArticle(request.toUpdate());
+        return Response.success();
+    }
+
 }
