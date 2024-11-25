@@ -1,10 +1,13 @@
 package com.carenet.api.infrastructure.exam.entity;
 
 import com.carenet.api.domain.exam.model.Exam;
+import com.carenet.api.domain.exam.model.enums.ProgressType;
 import com.carenet.api.infrastructure.BaseEntity;
-import com.carenet.api.infrastructure.useraccount.UserAccountEntity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
@@ -32,6 +35,10 @@ public class ExamEntity extends BaseEntity {
     @Column(columnDefinition = "int DEFAULT 0 COMMENT '정렬순서'")
     private int orders;
 
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(50) default 'IN_PROGRESS' comment '진행상태'")
+    private ProgressType progressType;
+
     @Setter
     @Column(columnDefinition = "bit default false NOT NULL COMMENT '삭제여부'")
     private boolean isRemoved;
@@ -58,7 +65,7 @@ public class ExamEntity extends BaseEntity {
     }
 
     public Exam toDomain() {
-        return Exam.of(id, name, orders, getCreatedAt(), getUpdatedAt());
+        return Exam.of(id, name, orders, progressType, getCreatedAt(), getUpdatedAt());
     }
 
 }

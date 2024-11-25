@@ -36,7 +36,8 @@ public class ExamJpaQuerySupport extends QuerydslRepositorySupport {
         QUserAccountEntity updatedBy = new QUserAccountEntity("updatedBy");
         List<ExamPayload.Get> list = queryFactory.select(
                         new QExamPayload_Get(
-                                examEntity.id, examEntity.name, examEntity.orders,
+                                examEntity.id, examEntity.name,
+                                examEntity.orders, examEntity.progressType,
                                 examEntity.createdAt, examEntity.updatedAt,
                                 examEntity.createdBy, examEntity.updatedBy,
                                 new QUserAccountResult_Get(createdBy.id, createdBy.username),
