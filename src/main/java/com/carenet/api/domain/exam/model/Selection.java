@@ -1,20 +1,21 @@
 package com.carenet.api.domain.exam.model;
 
+import com.carenet.api.infrastructure.exam.dto.payload.SelectionPayload;
 import com.carenet.api.infrastructure.exam.entity.SelectionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-/*
+/**
     객관식 문제 - 문제의 하위 객관식을 의미함
  */
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Selection {
-
     private Long questionId;
     private Long selectionId;
     private String content;
@@ -38,5 +39,9 @@ public class Selection {
 
     public SelectionEntity toEntity() {
         return SelectionEntity.of(questionId, selectionId, content);
+    }
+
+    public static Selection from(SelectionPayload.Get get) {
+        return Selection.of(get.getQuestionId(), get.getSelectionId(), get.getContent());
     }
 }

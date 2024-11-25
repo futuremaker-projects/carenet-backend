@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 public class SelectionPayload {
-
     @Getter
     @NoArgsConstructor
     public static class Get {
@@ -32,5 +31,4 @@ public class SelectionPayload {
             return Selection.of(questionId, selectionId, content);
         }
     }
-
 }

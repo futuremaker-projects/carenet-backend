@@ -1,6 +1,7 @@
 package com.carenet.api.domain.exam.model;
 
 import com.carenet.api.domain.useraccount.UserAccount;
+import com.carenet.api.infrastructure.exam.dto.payload.QuestionPayload;
 import com.carenet.api.infrastructure.exam.entity.QuestionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Question {
-
     private Long id;
     private Long examId;
     private Long codeId;
@@ -75,11 +75,11 @@ public class Question {
         return QuestionEntity.of(this.name, this.examId, this.article);
     }
 
-    public QuestionEntity toUpdate() {
-        return QuestionEntity.of(this.id, this.article);
-    }
-
-    public void updateArticle(Question question) {
-        this.article = question.article;
+    public static Question from(QuestionPayload.GetWithSelections get) {
+        return Question.of(
+                get.getId(), get.getName(), get.getExamId(),
+                get.getCodeId(), get.getArticle(),
+                get.getSelections().stream().map(Selection::from).toList()
+        );
     }
 }

@@ -40,7 +40,7 @@ public class QuestionPayload {
             this.updateUser = updateUser;
         }
 
-        public Question toDomain() {
+        public Question to() {
             return Question.of(
                     this.id, this.name, this.examId,
                     this.codeId, this.article, this.answer
@@ -67,9 +67,10 @@ public class QuestionPayload {
         private List<SelectionPayload.Get> selections;
 
         @QueryProjection
-        public GetWithSelections(Long id, Long examId, Long codeId, String name, String article,
-                   UserAccountPayload.Get createUser, UserAccountPayload.Get updateUser,
-                   List<SelectionPayload.Get> selections
+        public GetWithSelections(
+                Long id, Long examId, Long codeId, String name, String article,
+                UserAccountPayload.Get createUser, UserAccountPayload.Get updateUser,
+                List<SelectionPayload.Get> selections
         ) {
             this.id = id;
             this.examId = examId;
@@ -81,7 +82,7 @@ public class QuestionPayload {
             this.selections = selections;
         }
 
-        public Question toDomain() {
+        public Question to() {
             return Question.of(
                     this.id, this.name,
                     this.examId, this.codeId,
@@ -89,7 +90,5 @@ public class QuestionPayload {
                     selections.stream().map(SelectionPayload.Get::toDomain).toList()
             );
         }
-
     }
-
 }

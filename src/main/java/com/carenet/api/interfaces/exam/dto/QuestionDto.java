@@ -6,7 +6,6 @@ import com.carenet.api.domain.exam.model.Question;
 import java.util.List;
 
 public class QuestionDto {
-
     public record Request(Long id, String name, Long examId, String article) {
         public Request of(String name, Long examId, String article) {
             return new Request(null, name, examId, article);
@@ -18,10 +17,6 @@ public class QuestionDto {
 
         public Question toUpdate() {
             return Question.of(id, article);
-        }
-
-        public QuestionCommand.Get toCommand() {
-            return QuestionCommand.Get.of(id);
         }
     }
 
@@ -36,23 +31,19 @@ public class QuestionDto {
             return new Response(id, examId, codeId, name, article, selections);
         }
 
-        public static Response fromDomainList(Question question) {
+        public static Response fromWithoutSelections(Question question) {
             return Response.of(
                     question.getId(), question.getExamId(), question.getCodeId(),
                     question.getName(), question.getArticle(), null
             );
         }
 
-        public static Response fromDomain(Question question) {
+        public static Response from(Question question) {
             return Response.of(
                     question.getId(), question.getExamId(), question.getCodeId(),
                     question.getName(), question.getArticle(),
                     question.getSelections().stream().map(SelectionDto.Response::from).toList()
             );
         }
-    }
-
-    public record Search() {
-
     }
 }

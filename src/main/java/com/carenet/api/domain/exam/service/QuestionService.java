@@ -13,18 +13,18 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.stream.LongStream;
 
 @Service
 @RequiredArgsConstructor
 public class QuestionService {
-
     private final QuestionRepository questionRepository;
     private final SelectionRepository selectionRepository;
 
     public Slice<QuestionDto.Response> getQuestionsByExamId(Pageable pageable, QuestionCommand.Get get) {
         return questionRepository.getQuestionsByExamId(pageable, get.toStatement())
-                .map(QuestionDto.Response::fromDomainList);
+                .map(QuestionDto.Response::fromWithoutSelections);
     }
 
     /**
@@ -48,11 +48,16 @@ public class QuestionService {
 
     public QuestionDto.Response getQuestion(Long questionId) {
         Question question = questionRepository.getQuestion(questionId);
-        return QuestionDto.Response.fromDomain(question);
+        return QuestionDto.Response.from(question);
     }
 
     @Transactional
     public void updateArticle(Question update) {
         questionRepository.updateArticle(update);
+    }
+
+    public List<QuestionDto.Response> getQuestions(QuestionCommand.Get command) {
+        List<Question> questions = questionRepository.getQuestions(command.toStatement());
+        return questions.stream().map(QuestionDto.Response::from).toList();
     }
 }

@@ -28,7 +28,7 @@ public class QuestionEntity extends BaseEntity {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "varchar(50) default 'IN_PROGRESS' comment '진행상황'")
+    @Column(columnDefinition = "varchar(50) default 'IN_PROGRESS' comment '진행상태'")
     private ProgressType progressType;
 
     @Column(columnDefinition = "text comment '문제 본문'")

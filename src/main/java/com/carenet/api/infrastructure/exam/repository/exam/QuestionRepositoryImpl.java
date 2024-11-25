@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,7 +25,13 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public Slice<Question> getQuestionsByExamId(Pageable pageable, QuestionStatement.Get get) {
         Slice<QuestionPayload.Get> questions =  questionJpaQuerySupport.getQuestionsByExamId(pageable, get);
-        return questions.map(QuestionPayload.Get::toDomain);
+        return questions.map(QuestionPayload.Get::to);
+    }
+
+    @Override
+    public List<Question> getQuestions(QuestionStatement.Get get) {
+        List<QuestionPayload.GetWithSelections> questions = questionJpaQuerySupport.getQuestionsByExamId(get);
+        return questions.stream().map(QuestionPayload.GetWithSelections::to).toList();
     }
 
     @Override
@@ -35,9 +41,8 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public Question getQuestion(Long questionId) {
-        QuestionPayload.GetWithSelections questionPayload =
-                questionJpaQuerySupport.getQuestion(questionId);
-        return questionPayload.toDomain();
+        QuestionPayload.GetWithSelections question = questionJpaQuerySupport.getQuestion(questionId);
+        return question.to();
     }
 
     @Override
