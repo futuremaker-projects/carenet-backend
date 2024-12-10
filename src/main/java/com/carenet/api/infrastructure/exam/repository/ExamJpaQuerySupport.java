@@ -1,4 +1,4 @@
-package com.carenet.api.infrastructure.exam.repository.exam;
+package com.carenet.api.infrastructure.exam.repository;
 
 import com.carenet.api.infrastructure.Utils;
 import com.carenet.api.infrastructure.exam.dto.payload.ExamPayload;

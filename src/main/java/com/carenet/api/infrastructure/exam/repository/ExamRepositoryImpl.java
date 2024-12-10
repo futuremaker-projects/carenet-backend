@@ -1,4 +1,4 @@
-package com.carenet.api.infrastructure.exam.repository.exam;
+package com.carenet.api.infrastructure.exam.repository;
 
 import com.carenet.api.domain.exam.model.Exam;
 import com.carenet.api.domain.exam.repository.ExamRepository;

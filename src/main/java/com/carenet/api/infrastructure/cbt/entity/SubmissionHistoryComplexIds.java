@@ -1,4 +1,4 @@
-package com.carenet.api.infrastructure.exam.entity;
+package com.carenet.api.infrastructure.cbt.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -16,10 +16,12 @@ import java.util.Objects;
 @AllArgsConstructor
 public class SubmissionHistoryComplexIds {
 
+    @Column(name = "exam_id")
+    private Long examId;            // 특정 모의고사의
     @Column(name = "question_id")
-    private Long questionId;
+    private Long questionId;        // 특정 문제의 답을 저장함
     @Column(name = "user_id")
-    private Long userId;
+    private Long userId;            // 사용자 별로
 
     @Override
     public boolean equals(Object o) {

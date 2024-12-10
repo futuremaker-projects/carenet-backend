@@ -1,4 +1,4 @@
-package com.carenet.api.infrastructure.exam.entity;
+package com.carenet.api.infrastructure.cbt.entity;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -20,9 +20,6 @@ public class SubmissionEntity {
     private SubmissionComplexIds id;
 
     // 선택한 답
-    private Integer choice;
-
-    // 정답유무
-    private Boolean correct;
+    private Integer answer;
 
 }

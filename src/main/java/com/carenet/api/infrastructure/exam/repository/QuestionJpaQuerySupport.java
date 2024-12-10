@@ -1,4 +1,4 @@
-package com.carenet.api.infrastructure.exam.repository.exam;
+package com.carenet.api.infrastructure.exam.repository;
 
 import com.carenet.api.domain.exception.ApplicationException;
 import com.carenet.api.domain.exception.ErrorCode;

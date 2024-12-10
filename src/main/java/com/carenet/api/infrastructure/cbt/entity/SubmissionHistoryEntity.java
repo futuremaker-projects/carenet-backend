@@ -1,4 +1,4 @@
-package com.carenet.api.infrastructure.exam.entity;
+package com.carenet.api.infrastructure.cbt.entity;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

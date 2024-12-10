@@ -1,4 +1,4 @@
-package com.carenet.api.infrastructure.exam.entity;
+package com.carenet.api.infrastructure.cbt.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -15,7 +15,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubmissionComplexIds {
-
+    @Column(name = "exam_id")
+    private Long examId;
     @Column(name = "question_id")
     private Long questionId;
     @Column(name = "user_id")
@@ -26,12 +27,13 @@ public class SubmissionComplexIds {
         if (this == o) return true;
         if (o == null) return false;
         if (!(o instanceof SubmissionComplexIds ids)) return false;
-        return Objects.equals(questionId, ids.questionId) && Objects.equals(userId, ids.userId);
+        return Objects.equals(examId, ids.examId)
+                && Objects.equals(questionId, ids.questionId)
+                && Objects.equals(userId, ids.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(questionId, userId);
+        return Objects.hash(examId, questionId, userId);
     }
-
 }

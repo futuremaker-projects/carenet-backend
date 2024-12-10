@@ -1,10 +1,10 @@
-package com.carenet.api.infrastructure.cbt;
+package com.carenet.api.infrastructure.cbt.repository;
 
 import com.carenet.api.domain.cbt.CbtRepository;
 import com.carenet.api.domain.exam.model.Question;
 import com.carenet.api.infrastructure.exam.dto.statement.QuestionStatement;
-import com.carenet.api.infrastructure.exam.repository.exam.QuestionJpaQuerySupport;
-import com.carenet.api.infrastructure.exam.repository.exam.QuestionJpaRepository;
+import com.carenet.api.infrastructure.exam.repository.QuestionJpaQuerySupport;
+import com.carenet.api.infrastructure.exam.repository.QuestionJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
