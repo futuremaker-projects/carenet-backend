@@ -1,10 +1,8 @@
 package com.carenet.api.infrastructure.cbt.repository;
 
 import com.carenet.api.domain.cbt.CbtRepository;
-import com.carenet.api.domain.exam.model.Question;
-import com.carenet.api.infrastructure.exam.dto.statement.QuestionStatement;
-import com.carenet.api.infrastructure.exam.repository.QuestionJpaQuerySupport;
-import com.carenet.api.infrastructure.exam.repository.QuestionJpaRepository;
+import com.carenet.api.domain.cbt.model.Submission;
+import com.carenet.api.infrastructure.BulkInsertRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,14 +12,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CbtRepositoryImpl implements CbtRepository {
 
-    private final QuestionJpaRepository questionJpaRepository;
-    private final QuestionJpaQuerySupport questionJpaQuerySupport;
+    private final BulkInsertRepository bulkInsertRepository;
 
     @Override
-    public List<Question> getQuestionsByExamId(Long examId) {
-        return questionJpaQuerySupport.getQuestionsByExamId(QuestionStatement.Get.of(examId))
-                .stream().map(Question::from).toList();
+    public void deleteSubmissions(Long examId, Long userId) {
 
     }
 
+    @Override
+    public void saveSubmissions(List<Submission> submissions) {
+        String query = "INSERT INTO submission (exam_id, question_id, user_id, answer) VALUES (?, ?, ? ,?)";
+        bulkInsertRepository.bulkInsert(query, submissions,
+                (ps, data) -> {
+                    ps.setLong(1, data.getExamId());
+                    ps.setLong(2, data.getQuestionId());
+                    ps.setLong(3, data.getUserId());
+                    ps.setInt(4, data.getAnswer());
+                }
+        );
+    }
 }

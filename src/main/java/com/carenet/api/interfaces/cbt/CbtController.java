@@ -28,7 +28,7 @@ public class CbtController {
     @PostMapping("/exams/submit")
     public Response<Void> submitAnswers(@RequestBody CbtDto.Request request) {
         Long userId = 1L;
-        cbtService.saveCbtSubmission(request.toCommand(), userId);
+        cbtService.saveCbtSubmissions(request.toCommand(), userId);
         return Response.success();
     }
 

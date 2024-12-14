@@ -15,8 +15,8 @@ public class CbtDto {
         private Long examId;                        // 모의고사 id
         private List<CbtDto.Answers> answers;       // 모의고사 답
 
-        public CbtCommand.Create toCommand() {
-            return CbtCommand.Create.of(
+        public CbtCommand.CreateSubmissions toCommand() {
+            return CbtCommand.CreateSubmissions.of(
                     examId,
                     answers.stream()
                             .map(answer -> CbtCommand.Answers.of(answer.questionId, answer.answer))
