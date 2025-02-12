@@ -1,83 +1,74 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.3'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.springframework.boot' version '3.4.1'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'com.carenet'
-version = '0.0.1-SNAPSHOT'
+allprojects {
+    group = 'com.carenet'
+    version = '0.0.1-SNAPSHOT'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+    repositories {
+        mavenCentral()
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+    test {
+        exclude '**/*'
     }
 }
 
-repositories {
-    mavenCentral()
-}
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-
-    //querydsl 설정 추가
-    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-
-    // swagger
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
-}
-
-// 테스트 하지않고 빌드시 적용
-test {
-    exclude '**/*'
-}
-
-processResources.dependsOn('copySecret')
-
-tasks.register('copySecret') {
-    copy {
-        from 'src/main/resources/carenet-api-config'
-        include "*.yml"
-        into 'src/main/resources'
-    }
-}
-
-// Querydsl 설정부
-def generated = 'src/main/generated'
-
-// querydsl QClass 파일 생성 위치를 지정
-tasks.withType(JavaCompile) {
-    options.getGeneratedSourceOutputDirectory().set(file(generated))
-}
-
-// java source set 에 querydsl QClass 위치 추가
-sourceSets {
-    main.java.srcDirs += [ generated ]
-}
-
-// gradle clean 시에 QClass 디렉토리 삭제
-clean {
-    delete file(generated)
-}
+//dependencies {
+//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    compileOnly 'org.projectlombok:lombok'
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//    runtimeOnly 'com.mysql:mysql-connector-j'
+//
+//    //querydsl 설정 추가
+//    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+//    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+//    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+//    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+//
+//    // swagger
+//    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+//
+//    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+//    annotationProcessor 'org.projectlombok:lombok'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+//}

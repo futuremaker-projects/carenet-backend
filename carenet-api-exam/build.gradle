@@ -1,0 +1,15 @@
+bootJar.enabled = true
+jar.enabled = false
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.data:spring-data-commons'
+
+    // swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+    implementation project(':carenet-common:common')
+    implementation project(':carenet-domain-exam')
+
+    implementation project(':carenet-infrastructures:storage')
+}
