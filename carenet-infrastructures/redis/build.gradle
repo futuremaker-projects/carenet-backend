@@ -1,2 +1,19 @@
 bootJar.enabled = false
 jar.enabled = true
+
+dependencies {
+
+}
+
+tasks.register('copySecret') {
+    doLast {
+        copy {
+            from("$rootDir/module-config") // 절대 경로로 설정
+            include "redis.yml"
+            into("$rootDir/carenet-infrastructures/redis/src/main/resources")
+        }
+    }
+}
+tasks.named('processResources').configure {
+    dependsOn copySecret
+}

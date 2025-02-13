@@ -14,19 +14,22 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
     implementation project(':carenet-common:common')
-    implementation project(':carenet-domain-exam')
-    implementation project(':carenet-domain-admin')
+    implementation project(':carenet-domain:admin-domain')
+    implementation project(':carenet-domain:exam-domain')
 }
 
-//rocessResources.dependsOn('copySecret')
-//
-//tasks.register('copySecret') {
-//    copy {
-//        from 'src/main/resources/carenet-api-config'
-//        include "*.yml"
-//        into 'src/main/resources'
-//    }
-//}
+tasks.register('copySecret') {
+    doLast {
+        copy {
+            from("$rootDir/module-config") // 절대 경로로 설정
+            include "storage.yml"
+            into("$rootDir/carenet-infrastructures/storage/src/main/resources")
+        }
+    }
+}
+tasks.named('processResources').configure {
+    dependsOn copySecret
+}
 
 // Querydsl 설정부
 def generated = 'src/main/generated'

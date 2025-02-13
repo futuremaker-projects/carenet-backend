@@ -1,4 +1,3 @@
-HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -36,8 +35,16 @@ out/
 ### VS Code ###
 .vscode/
 
-src/main/generated/**
-src/main/resources/*.yml
+### application config
+carenet-infrastructures/storage/src/main/generated/**
+carenet-infrastructures/storage/src/main/resources/*.yml
+
+carenet-infrastructures/redis/src/main/resources/*.yml
+module-config/**
+
+### MAC OS
+.DS_Store
 
 ### docker related file
 .env
+
