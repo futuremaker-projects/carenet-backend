@@ -70,8 +70,8 @@ public class ExamController {
                     """
             )}))
     @PostMapping("/save")
-    public Response<Void> saveExam(@RequestBody ExamDto.Request requestDto) {
-        examService.createExam(requestDto.toCommand());
+    public Response<Void> saveExam(@RequestBody ExamDto.Create createDto) {
+        examService.createExam(createDto.toCommand());
         return Response.success();
     }
 
@@ -88,6 +88,23 @@ public class ExamController {
         Slice<QuestionDto.Response> questions =
                 questionService.getQuestionsByExamId(pageable, QuestionCommand.Get.of(examId)).map(QuestionDto.Response::from);
         return Response.success(questions);
+    }
+
+    @Operation(summary = "모의고사에 속한 문제 전체수량 - 목록의 인덱스를 위한")
+    @Parameter(name = "모의고사에 속한 문제 전체수량", description = "모의고사 명으로 조회")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(examples = {
+            @ExampleObject(name = "Long", value =
+                    """
+                        { "search": 15, "page": 0, "sort": "createdAt,desc", "last": false }
+                    """
+            )}))
+    @PostMapping("/{examId}/questions/total")
+    public Response<Long> getQuestionTotalByExamId(
+            @RequestBody QuestionDto.Search searchDto,
+            @PathVariable("examId") Long examId
+    ) {
+        Long count = questionService.getTotalCountByExamId(searchDto.toCommand(), examId);
+        return Response.success(count);
     }
 
 }

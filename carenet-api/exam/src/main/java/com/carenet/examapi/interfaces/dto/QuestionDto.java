@@ -1,11 +1,10 @@
 package com.carenet.examapi.interfaces.dto;
 
-
 import com.carenet.exam.exam.dto.command.QuestionCommand;
 import com.carenet.exam.exam.model.Question;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Stack;
 
 public class QuestionDto {
     public record Create(String name, Long examId, String article) {
@@ -39,18 +38,20 @@ public class QuestionDto {
             return new Response(id, examId, codeId, name, article, selections);
         }
 
-//        public static Response fromWithoutSelections(Question question) {
-//            return Response.of(
-//                    question.getId(), question.getExamId(), question.getCodeId(),
-//                    question.getName(), question.getArticle(), null
-//            );
-//        }
+        public static Response fromWithoutSelections(Question question) {
+            return Response.of(
+                    question.getId(), question.getExamId(), question.getCodeId(),
+                    question.getName(), question.getArticle(), null
+            );
+        }
 
         public static Response from(Question question) {
             return Response.of(
                     question.getId(), question.getExamId(), question.getCodeId(),
                     question.getName(), question.getArticle(),
-                    question.getSelections().stream().map(SelectionDto.Response::from).toList()
+                    question.getSelections() != null ?
+                            question.getSelections().stream().map(SelectionDto.Response::from).toList() :
+                            Collections.emptyList()
             );
         }
     }

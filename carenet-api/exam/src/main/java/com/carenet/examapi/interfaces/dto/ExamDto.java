@@ -8,13 +8,13 @@ import com.carenet.exam.userAccount.UserAccount;
 import java.time.LocalDateTime;
 
 public class ExamDto {
-    public record Request(String name, int orders) {
+    public record Create(String name, int orders) {
         public ExamCommand.Create toCommand() {
             return ExamCommand.Create.of(this.name, this.orders);
         }
 
-        public static Request of(String name) {
-            return new Request(name, 0);
+        public static Create of(String name) {
+            return new Create(name, 0);
         }
     }
 

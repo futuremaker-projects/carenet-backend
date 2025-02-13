@@ -36,33 +36,13 @@ public class QuestionController {
                     """
             )}))
     @PostMapping("/save")
-    public Response<Void> createQuestion(@RequestBody QuestionDto.Create request) {
-        questionService.createQuestion(request.toCreateCommand());
+    public Response<Void> createQuestion(@RequestBody QuestionDto.Create createDto) {
+        questionService.createQuestion(createDto.toCreateCommand());
         return Response.success();
-    }
-
-    @Operation(summary = "모의고사 전체수량 - 목록의 인덱스를 위한")
-    @Parameter(name = "모의고사 전체수량", description = "모의고사 명으로 조회")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(examples = {
-            @ExampleObject(name = "Long", value =
-                    """
-                        { "size": 15, "page": 0, "sort": "createdAt,desc", "last": false }
-                    """
-            )}))
-    @PostMapping("/{examId}/total")
-    public Response<Long> getTotal(@RequestBody QuestionDto.Search search, @PathVariable("examId") Long examId) {
-        Long count = questionService.getTotalCountByExamId(search.toCommand(), examId);
-        return Response.success(count);
     }
 
     @Operation(summary = "문제 단일 조회")
     @Parameter(name = "문제 단일 조회", description = "문제 상세페이지")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(examples = {
-            @ExampleObject(name = "QuestionDto.Response", value =
-                    """
-                        {}
-                    """
-            )}))
     @GetMapping("/{questionId}")
     public Response<QuestionDto.Response> getQuestionByExamId(@PathVariable("questionId") Long questionId) {
         QuestionDto.Response question = QuestionDto.Response.from(questionService.getQuestion(questionId));
@@ -70,8 +50,8 @@ public class QuestionController {
     }
 
     @PutMapping
-    public Response<Void> updateArticle(@RequestBody QuestionDto.Update request) {
-        questionService.updateArticle(request.toUpdateCommand());
+    public Response<Void> updateArticle(@RequestBody QuestionDto.Update updateDto) {
+        questionService.updateArticle(updateDto.toUpdateCommand());
         return Response.success();
     }
 
