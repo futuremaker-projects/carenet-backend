@@ -1,6 +1,5 @@
 package com.carenet.storage.exam.entity;
 
-import com.carenet.admin.upload.Upload;
 import com.carenet.common.enums.ContentCategory;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -12,7 +11,8 @@ import org.hibernate.annotations.Comment;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "upload",
+@Table(
+        name = "upload",
         indexes = @Index(
                 name = "idx_content_id_content_category",
                 columnList = "contentId, contentCategory"
@@ -66,7 +66,4 @@ public class UploadEntity {
                 .build();
     }
 
-    public Upload toDomain() {
-        return Upload.of(id, fileName, storedName, contentType, path, contentId, contentCategory);
-    }
 }

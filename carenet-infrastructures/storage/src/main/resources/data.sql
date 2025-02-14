@@ -147,3 +147,12 @@ insert into selection(`question_id`, `selection_id`, `content`, `created_at`, `u
         (20, 3, '하지를 높여주고, 담요를 덮어 보온해 준다.', '2024-10-10 00:00:00', null),
         (20, 4, '의식이 없는 환자에게 물을 입에 넣어준다.', '2024-10-10 00:00:00', null),
         (20, 5, '수액주입속도를 줄인다.', '2024-10-10 00:00:00', null);
+
+insert into code(`name`, `parent_id`, `user_id`, `orders`, `question_count`) values
+         ('최상위 코드', null, 1, null, null),
+         ('하위 코드1', 1, 1, null, null),
+         ('하위 코드2', 1, 1, null, null),
+         ('하위 코드3', 1, 1, null, null),
+         ('user2의 최상위 코드', null, 2, null, null),
+         ('하위 코드1', 5, 2, null, null),
+         ('하위 코드2', 5, 2, null, null);

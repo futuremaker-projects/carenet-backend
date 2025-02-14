@@ -1,6 +1,5 @@
 package com.carenet.storage.exam.entity.exam;
 
-import com.carenet.admin.exam.model.Exam;
 import com.carenet.common.enums.ProgressType;
 import com.carenet.storage.BaseEntity;
 import jakarta.persistence.*;
@@ -27,13 +26,14 @@ import java.util.Objects;
 public class ExamEntity extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long id;
 
     @Column(columnDefinition = "VARCHAR(100) COMMENT '모의고사 명'")
     private String name;
 
-    @Column(columnDefinition = "int DEFAULT 0 COMMENT '정렬순서'")
-    private int orders;
+    @Column(columnDefinition = "int COMMENT '정렬순서'")
+    private Integer orders;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(50) default 'IN_PROGRESS' comment '진행상태'")
@@ -41,7 +41,7 @@ public class ExamEntity extends BaseEntity {
 
     @Setter
     @Column(columnDefinition = "bit default false NOT NULL COMMENT '삭제여부'")
-    private boolean isRemoved;
+    private Boolean isRemoved;
 
     public ExamEntity(String name, int orders) {
         this.name = name;
@@ -62,10 +62,6 @@ public class ExamEntity extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    public Exam toDomain() {
-        return Exam.of(id, name, orders, progressType, getCreatedAt(), getUpdatedAt());
     }
 
 }

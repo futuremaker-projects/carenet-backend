@@ -1,9 +1,11 @@
 package com.carenet.storage.exam.mapper;
 
+import com.carenet.admin.code.Code;
 import com.carenet.admin.exam.model.Exam;
 import com.carenet.admin.exam.model.Question;
 import com.carenet.admin.exam.model.Selection;
 import com.carenet.admin.upload.Upload;
+import com.carenet.storage.exam.entity.CodeEntity;
 import com.carenet.storage.exam.entity.UploadEntity;
 import com.carenet.storage.exam.entity.exam.ExamEntity;
 import com.carenet.storage.exam.entity.exam.QuestionEntity;
@@ -45,6 +47,15 @@ public class ModelMapper {
                     uploadEntity.getId(), uploadEntity.getFileName(), uploadEntity.getStoredName(),
                     uploadEntity.getPath(), uploadEntity.getContentType(), uploadEntity.getContentId(),
                     uploadEntity.getContentCategory()
+            );
+        }
+    }
+
+    public record CodeMapper() {
+        public static Code from(CodeEntity codeEntity) {
+            return Code.of(
+                    codeEntity.getId(), codeEntity.getName(), codeEntity.getParentId(),
+                    codeEntity.getUserId(), codeEntity.getOrders(), codeEntity.getQuestionCount()
             );
         }
     }
