@@ -1,6 +1,6 @@
 package com.carenet.storage.exam.entity.exam;
 
-import com.carenet.exam.exam.dto.command.SelectionCommand;
+import com.carenet.admin.exam.dto.command.SelectionCommand;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

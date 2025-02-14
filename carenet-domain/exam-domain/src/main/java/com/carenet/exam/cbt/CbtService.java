@@ -1,5 +1,6 @@
 package com.carenet.exam.cbt;
 
+import com.carenet.exam.cbt.dto.command.CbtCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

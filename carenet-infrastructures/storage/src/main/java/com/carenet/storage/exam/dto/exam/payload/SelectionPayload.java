@@ -1,6 +1,6 @@
 package com.carenet.storage.exam.dto.exam.payload;
 
-import com.carenet.exam.exam.model.Selection;
+import com.carenet.admin.exam.model.Selection;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

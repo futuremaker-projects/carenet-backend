@@ -1,0 +1,9 @@
+### 단답식 문항 단일 수정
+PUT http://localhost:8080/api/selections
+Content-Type: application/json
+
+{
+  "questionId": 1,
+  "selectionId": 1,
+  "content": "수정됨"
+}

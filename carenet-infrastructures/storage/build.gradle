@@ -14,8 +14,10 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
     implementation project(':carenet-common:common')
+
     implementation project(':carenet-domain:admin-domain')
     implementation project(':carenet-domain:exam-domain')
+    implementation project(':carenet-domain:user')
 }
 
 tasks.register('copySecret') {

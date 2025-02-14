@@ -1,7 +1,7 @@
 package com.carenet.storage.exam.dto.exam.payload;
 
+import com.carenet.admin.exam.model.Exam;
 import com.carenet.common.enums.ProgressType;
-import com.carenet.exam.exam.model.Exam;
 import com.carenet.storage.exam.dto.userAccount.UserAccountResult;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;

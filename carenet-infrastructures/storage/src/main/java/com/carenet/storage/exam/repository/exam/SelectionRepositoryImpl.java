@@ -1,10 +1,10 @@
 package com.carenet.storage.exam.repository.exam;
 
+import com.carenet.admin.exam.dto.command.SelectionCommand;
+import com.carenet.admin.exam.model.Selection;
+import com.carenet.admin.exam.repository.SelectionRepository;
 import com.carenet.common.exception.ApplicationException;
 import com.carenet.common.exception.ErrorCode;
-import com.carenet.exam.exam.dto.command.SelectionCommand;
-import com.carenet.exam.exam.model.Selection;
-import com.carenet.exam.exam.repository.SelectionRepository;
 import com.carenet.storage.exam.entity.exam.SelectionEntity;
 import com.carenet.storage.exam.mapper.ModelMapper;
 import lombok.RequiredArgsConstructor;

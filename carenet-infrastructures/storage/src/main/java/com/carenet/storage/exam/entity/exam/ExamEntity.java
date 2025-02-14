@@ -1,7 +1,7 @@
 package com.carenet.storage.exam.entity.exam;
 
+import com.carenet.admin.exam.model.Exam;
 import com.carenet.common.enums.ProgressType;
-import com.carenet.exam.exam.model.Exam;
 import com.carenet.storage.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

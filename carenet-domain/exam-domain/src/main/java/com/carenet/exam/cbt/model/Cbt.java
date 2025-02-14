@@ -1,7 +1,7 @@
 package com.carenet.exam.cbt.model;
 
-import com.carenet.exam.exam.model.Question;
-import com.carenet.exam.userAccount.UserAccount;
+import com.carenet.user.userAccount.UserAccount;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +10,10 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Cbt {
 
-    private List<Question> questions;
+    private List<CbtQuestion> questions;
 
     private UserAccount userAccount;
 

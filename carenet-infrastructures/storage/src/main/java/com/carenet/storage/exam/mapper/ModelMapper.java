@@ -1,9 +1,9 @@
 package com.carenet.storage.exam.mapper;
 
-import com.carenet.exam.exam.model.Exam;
-import com.carenet.exam.exam.model.Question;
-import com.carenet.exam.exam.model.Selection;
-import com.carenet.exam.upload.Upload;
+import com.carenet.admin.exam.model.Exam;
+import com.carenet.admin.exam.model.Question;
+import com.carenet.admin.exam.model.Selection;
+import com.carenet.admin.upload.Upload;
 import com.carenet.storage.exam.entity.UploadEntity;
 import com.carenet.storage.exam.entity.exam.ExamEntity;
 import com.carenet.storage.exam.entity.exam.QuestionEntity;

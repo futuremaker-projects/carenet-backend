@@ -1,10 +1,13 @@
 rootProject.name = 'carenet-backend'
 
-include 'carenet-api:exam'
+include 'carenet-api:exam-api'
 include 'carenet-domain:exam-domain'
 
-include 'carenet-api:admin'
+include 'carenet-api:admin-api'
 include 'carenet-domain:admin-domain'
+include 'carenet-application:admin-application'
+
+include 'carenet-domain:user'
 
 include 'carenet-common:common'
 include 'carenet-infrastructures:redis'

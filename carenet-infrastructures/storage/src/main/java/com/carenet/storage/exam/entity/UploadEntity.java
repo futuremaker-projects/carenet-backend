@@ -1,7 +1,7 @@
 package com.carenet.storage.exam.entity;
 
+import com.carenet.admin.upload.Upload;
 import com.carenet.common.enums.ContentCategory;
-import com.carenet.exam.upload.Upload;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

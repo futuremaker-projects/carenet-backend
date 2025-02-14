@@ -1,10 +1,10 @@
 package com.carenet.storage.exam.repository.exam;
 
+import com.carenet.admin.exam.dto.command.QuestionCommand;
+import com.carenet.admin.exam.model.Question;
+import com.carenet.admin.exam.repository.QuestionRepository;
 import com.carenet.common.exception.ApplicationException;
 import com.carenet.common.exception.ErrorCode;
-import com.carenet.exam.exam.dto.command.QuestionCommand;
-import com.carenet.exam.exam.model.Question;
-import com.carenet.exam.exam.repository.QuestionRepository;
 import com.carenet.storage.exam.dto.exam.payload.QuestionPayload;
 import com.carenet.storage.exam.dto.exam.statement.QuestionStatement;
 import com.carenet.storage.exam.entity.exam.QuestionEntity;

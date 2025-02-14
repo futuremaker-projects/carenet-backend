@@ -1,8 +1,8 @@
 package com.carenet.storage.exam.repository.exam;
 
-import com.carenet.exam.exam.dto.command.ExamCommand;
-import com.carenet.exam.exam.model.Exam;
-import com.carenet.exam.exam.repository.ExamRepository;
+import com.carenet.admin.exam.dto.command.ExamCommand;
+import com.carenet.admin.exam.model.Exam;
+import com.carenet.admin.exam.repository.ExamRepository;
 import com.carenet.storage.exam.dto.exam.payload.ExamPayload;
 import com.carenet.storage.exam.dto.exam.statement.ExamStatement;
 import com.carenet.storage.exam.entity.exam.ExamEntity;

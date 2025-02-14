@@ -1,8 +1,8 @@
 package com.carenet.storage.exam.repository;
 
-import com.carenet.exam.upload.Upload;
-import com.carenet.exam.upload.UploadRepository;
-import com.carenet.exam.upload.dto.UploadCommand;
+import com.carenet.admin.upload.Upload;
+import com.carenet.admin.upload.UploadRepository;
+import com.carenet.admin.upload.dto.UploadCommand;
 import com.carenet.storage.exam.entity.UploadEntity;
 import com.carenet.storage.exam.mapper.ModelMapper;
 import lombok.RequiredArgsConstructor;
