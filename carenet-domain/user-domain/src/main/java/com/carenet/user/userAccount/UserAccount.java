@@ -27,13 +27,4 @@ public class UserAccount {
         return new UserAccount(id, username);
     }
 
-//    public UserAccountEntity toEntity() {
-//        return UserAccountEntity.of(this.id, this.username);
-//    }
-//
-//    @QueryProjection
-//    public UserAccount(Long id, String username) {
-//        this.id = id;
-//        this.username = username;
-//    }
 }

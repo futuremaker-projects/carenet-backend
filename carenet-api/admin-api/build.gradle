@@ -10,6 +10,7 @@ dependencies {
 
     implementation project(':carenet-common:common')
     implementation project(':carenet-domain:admin-domain')
+    implementation project(':carenet-domain:user-domain')
 
     implementation project(':carenet-infrastructures:storage')
     implementation project(':carenet-infrastructures:redis')

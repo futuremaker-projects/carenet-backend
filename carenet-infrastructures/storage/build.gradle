@@ -17,7 +17,7 @@ dependencies {
 
     implementation project(':carenet-domain:admin-domain')
     implementation project(':carenet-domain:exam-domain')
-    implementation project(':carenet-domain:user')
+    implementation project(':carenet-domain:user-domain')
 }
 
 tasks.register('copySecret') {

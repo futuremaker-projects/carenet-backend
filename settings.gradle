@@ -7,7 +7,7 @@ include 'carenet-api:admin-api'
 include 'carenet-domain:admin-domain'
 include 'carenet-application:admin-application'
 
-include 'carenet-domain:user'
+include 'carenet-domain:user-domain'
 
 include 'carenet-common:common'
 include 'carenet-infrastructures:redis'

@@ -2,8 +2,8 @@ package com.carenet.adminapi.interfaces.dto;
 
 import com.carenet.admin.exam.dto.command.ExamCommand;
 import com.carenet.admin.exam.model.Exam;
-import com.carenet.admin.userAccount.UserAccount;
 import com.carenet.common.enums.ProgressType;
+import com.carenet.user.userAccount.UserAccount;
 
 import java.time.LocalDateTime;
 
