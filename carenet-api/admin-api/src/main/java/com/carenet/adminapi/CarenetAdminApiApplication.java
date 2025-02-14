@@ -7,7 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationPropertiesScan
 @SpringBootApplication(scanBasePackages = {
         "com.carenet.admin", "com.carenet.adminapi",
-        "com.carenet.common", "com.carenet.storage"
+        "com.carenet.common", "com.carenet.storage",
+        "com.carenet.user"
 })
 public class CarenetAdminApiApplication {
 

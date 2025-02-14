@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ConfigurationPropertiesScan
 @SpringBootApplication(scanBasePackages = {
         "com.carenet.common", "com.carenet.exam",
-        "com.carenet.storage", "com.carenet.examapi"
+        "com.carenet.storage", "com.carenet.examapi",
+        "com.carenet.user"
 })
 public class CarenetExamApiApplication {
 
