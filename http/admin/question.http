@@ -1,0 +1,22 @@
+### 문제 생성
+POST http://localhost:8091/api/admin/questions/save
+Content-Type: application/json
+
+{
+  "name": "문제1",
+  "examId": 21
+}
+
+
+### 문제 단일 조회
+GET http://localhost:8091/api/admin/questions/1
+
+
+### 문제 본문 수정
+PUT http://localhost:8091/api/admin/questions
+Content-Type: application/json
+
+{
+  "id": 1,
+  "article": "1212"
+}

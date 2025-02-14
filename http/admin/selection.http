@@ -1,5 +1,5 @@
 ### 단답식 문항 단일 수정
-PUT http://localhost:8080/api/selections
+PUT http://localhost:8091/admin/api/selections
 Content-Type: application/json
 
 {

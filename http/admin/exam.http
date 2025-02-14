@@ -1,0 +1,42 @@
+### 모의고사 목록조회 (Slice)
+POST http://localhost:8091/api/admin/exams
+Content-Type: application/json
+
+{
+  "name": null
+}
+
+### 모의고사 수량조회 (count)
+POST http://localhost:8091/api/admin/exams/total
+Content-Type: application/json
+
+{
+  "size": 15, "page": 0, "sort": "createdAt,desc", "last": false
+}
+
+### 모의고사 회차 단일등록
+POST http://localhost:8091/api/admin/exams/save
+Content-Type: application/json
+
+{
+  "name": "모의고사 1회"
+}
+
+### 모의고사에 따른 문제 목록조회
+POST http://localhost:8091/api/admin/exams/21/questions
+Content-Type: application/json
+
+{
+  "size": 15, "page": 0, "sort": "createdAt,desc", "last": false
+}
+
+### 모의고사에 따른 문제 총 수량조회
+POST http://localhost:8091/api/admin/exams/21/questions/total
+Content-Type: application/json
+
+{
+  "searchDto": {
+    "name": null
+  }
+}
+

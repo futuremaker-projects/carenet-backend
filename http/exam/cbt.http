@@ -1,0 +1,10 @@
+### cbt 모의고사 시험 문제 목록조회
+GET http://localhost:8090/api/exam/cbt/exams/21/questions
+
+### cbt 모의고사 답안 제출 - 다시 살펴보자
+POST http://localhost:8090/api/exam/cbt/exams/submit
+Content-Type: application/json
+
+{
+
+}
