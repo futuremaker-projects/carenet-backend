@@ -148,11 +148,18 @@ insert into selection(`question_id`, `selection_id`, `content`, `created_at`, `u
         (20, 4, '의식이 없는 환자에게 물을 입에 넣어준다.', '2024-10-10 00:00:00', null),
         (20, 5, '수액주입속도를 줄인다.', '2024-10-10 00:00:00', null);
 
-insert into code(`name`, `parent_id`, `user_id`, `orders`, `question_count`) values
-         ('최상위 코드', null, 1, null, null),
-         ('하위 코드1', 1, 1, null, null),
-         ('하위 코드2', 1, 1, null, null),
-         ('하위 코드3', 1, 1, null, null),
-         ('user2의 최상위 코드', null, 2, null, null),
-         ('하위 코드1', 5, 2, null, null),
-         ('하위 코드2', 5, 2, null, null);
+insert into code(`id`, `name`, `parent_id`, `user_id`, `orders`, `question_count`) values
+         (1, '최상위 코드', null, 1, null, null),
+         (2, '하위1 코드2', 1, 1, null, null),
+         (3, '하위1 코드3', 1, 1, null, null),
+         (4, '하위1 코드4', 1, 1, null, null),
+         (5, '하위1 코드5', 2, 1, null, null),
+         (6, '하위1 코드6', 5, 1, null, null),
+         (7, '하위1 코드7', 6, 1, null, null),
+         (8, '최상위 코드222', null, 1, null, null),
+         (9, '하위1 코드2', 8, 1, null, null),
+         (10, '하위1 코드2', 9, 1, null, null),
+         (11, '하위1 코드2', 10, 1, null, null),
+         (12, '하위1 코드2', 11, 1, null, null),
+         (13, '하위1 코드2', 12, 1, null, null);
+

@@ -2,7 +2,9 @@ package com.carenet.admin.code;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
     캐시 처리를 위해 데이터를 어떻게 처리할 지 고민해야 함
@@ -12,6 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@ToString
 public class Code {
 
     private Long id;
@@ -20,7 +23,8 @@ public class Code {
     private Integer orders;
     private Long userId;
 
-    private List<Code> children;
+    @Builder.Default
+    private List<Code> children = new ArrayList<>();
 
     /**
         모의고사의 문제의 생성 수를 제한하기 위해 사용
@@ -43,6 +47,19 @@ public class Code {
 
     public static Code of(Long id, String name, Long parentId) {
         return Code.builder().id(id).name(name).parentId(parentId).build();
+    }
+
+    /** set or hash 로 계층형 로직 변경 대비 (중복된 Code가 들어가면 Set으로 자료구조 변경 필요)*/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Code code)) return false;
+        return id != null && id.equals(code.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }
